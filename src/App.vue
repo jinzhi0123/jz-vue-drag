@@ -54,7 +54,7 @@ const de2 = ref()
 const watchComponents = [de1, de2]
 
 function dragging(event:any) {
-  alert("贴贴~\n"+event)
+  console.log("贴贴~\n"+event)
 }
 function dragstart(event:any) {
   alert("贴贴~\n"+event)
