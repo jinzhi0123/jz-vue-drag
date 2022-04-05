@@ -30,28 +30,28 @@ const props = defineProps({
         type: [Number, String],
         default: '100%',
         validator(value) {
-            return typeof (value) == 'number' || (typeof (value) == 'string' && value.indexOf('%') != -1)
+            return typeof (value) == 'number' || (typeof (value) == 'string' && value.indexOf('%') != -1) || value == 'center'
         }
     },
     draggableAreaH: {
         type: [Number, String],
         default: '100%',
         validator(value) {
-            return typeof (value) == 'number' || (typeof (value) == 'string' && (value.indexOf('%') != -1))
+            return typeof (value) == 'number' || (typeof (value) == 'string' && (value.indexOf('%') != -1)) || value == 'center'
         }
     },
     draggableAreaT: {
         type: [Number, String],
         default: 0,
         validator(value) {
-            return typeof (value) == 'number' || (typeof (value) == 'string' && (value.indexOf('%') != -1))
+            return typeof (value) == 'number' || (typeof (value) == 'string' && (value.indexOf('%') != -1)) || value == 'center'
         }
     },
     draggableAreaL: {
         type: [Number, String],
         default: 0,
         validator(value) {
-            return typeof (value) == 'number' || (typeof (value) == 'string' && value.indexOf('%') != -1)
+            return typeof (value) == 'number' || (typeof (value) == 'string' && value.indexOf('%') != -1) || value == 'center'
         }
     },
     isDraggable: {
@@ -117,30 +117,23 @@ function getPosition(): positionType {
     return position
 }
 const draggableAreaW = computed(() => {
-    console.log('dragContainerW是 ' + dragContainerW.value)
-    if (typeof (props.draggableAreaW) === 'number') return props.draggableAreaW
-    if (typeof (props.draggableAreaW) === 'string') return Number(props.draggableAreaW.replace("%", "")) / 100 * dragContainerW.value
+    if (typeof (props.draggableAreaW) === 'number') return props.draggableAreaW + 'px'
+    if (typeof (props.draggableAreaW) === 'string') return props.draggableAreaW
 })
 const draggableAreaH = computed(() => {
-    if (typeof (props.draggableAreaH) === 'number') return props.draggableAreaH
-    if (typeof (props.draggableAreaH) === 'string') return Number(props.draggableAreaH.replace("%", "")) / 100 * dragContainerH.value
+    if (typeof (props.draggableAreaH) === 'number') return props.draggableAreaH + 'px'
+    if (typeof (props.draggableAreaH) === 'string') return props.draggableAreaH
 })
 
 const draggableAreaT = computed(() => {
-    if (typeof (props.draggableAreaT) === 'number') return props.draggableAreaT
-    if (typeof (props.draggableAreaT) === 'string' && dragContainerH.value > 0) {
-        return Number(props.draggableAreaT.replace("%", "")) / 100 * dragContainerH.value
-    } else {
-        return 0
-    }
+    if (typeof (props.draggableAreaT) === 'number') return props.draggableAreaT + 'px'
+    if (props.draggableAreaT == 'center' && typeof (props.draggableAreaH) === 'string') return (100 - Number(props.draggableAreaH.replace("%", ""))) / 2 + '%'
+    if (typeof (props.draggableAreaT) === 'string') return props.draggableAreaT
 })
 const draggableAreaL = computed(() => {
-    if (typeof (props.draggableAreaL) === 'number') return props.draggableAreaL
-    if (typeof (props.draggableAreaL) === 'string' && dragContainerW.value > 0) {
-        return Number(props.draggableAreaL.replace("%", "")) / 100 * dragContainerW.value
-    } else {
-        return 0
-    }
+    if (typeof (props.draggableAreaL) === 'number') return props.draggableAreaL + 'px'
+    if (props.draggableAreaL == 'center' && typeof (props.draggableAreaW) === 'string') return (100 - Number(props.draggableAreaW.replace("%", ""))) / 2 + '%'
+    if (typeof (props.draggableAreaL) === 'string') return props.draggableAreaL
 })
 const dragContainer = ref() as Ref<HTMLElement>
 const draggableArea = ref() as Ref<HTMLElement>
@@ -164,8 +157,8 @@ const dragContainerPosition = computed(() => {
 })
 const draggableAreaStyle = computed(() => {
     return {
-        width: draggableAreaW.value + 'px', height: draggableAreaH.value + 'px',
-        top: draggableAreaT.value + 'px', left: draggableAreaL.value + 'px'
+        width: draggableAreaW.value, height: draggableAreaH.value,
+        top: draggableAreaT.value, left: draggableAreaL.value
     }
 })
 type curType = {

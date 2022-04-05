@@ -23,21 +23,21 @@ const props = defineProps({
         type: [Number, String],
         default: '100%',
         validator(value) {
-            return typeof (value) == 'number' || (typeof (value) == 'string' && (value.indexOf('%') != -1))
+            return typeof (value) == 'number' || (typeof (value) == 'string' && (value.indexOf('%') != -1)) || value == 'center'
         }
     },
     innerAreaT: {
         type: [Number, String],
         default: 0,
         validator(value) {
-            return typeof (value) == 'number' || (typeof (value) == 'string' && (value.indexOf('%') != -1))
+            return typeof (value) == 'number' || (typeof (value) == 'string' && (value.indexOf('%') != -1)) || value == 'center'
         }
     },
     innerAreaL: {
         type: [Number, String],
         default: 0,
         validator(value) {
-            return typeof (value) == 'number' || (typeof (value) == 'string' && value.indexOf('%') != -1)
+            return typeof (value) == 'number' || (typeof (value) == 'string' && value.indexOf('%') != -1) || value == 'center'
         }
     },
     checkOverlapArea: {
@@ -71,10 +71,12 @@ const innerAreaH = computed(() => {
 
 const innerAreaT = computed(() => {
     if (typeof (props.innerAreaT) === 'number') return props.innerAreaT + 'px'
+    if (props.innerAreaT == 'center' && typeof (props.innerAreaH) === 'string') return (100 - Number(props.innerAreaH.replace("%", ""))) / 2 + '%'
     if (typeof (props.innerAreaT) === 'string') return props.innerAreaT
 })
 const innerAreaL = computed(() => {
     if (typeof (props.innerAreaL) === 'number') return props.innerAreaL + 'px'
+    if (props.innerAreaL == 'center' && typeof (props.innerAreaW) === 'string') return (100 - Number(props.innerAreaW.replace("%", ""))) / 2 + '%'
     if (typeof (props.innerAreaL) === 'string') return props.innerAreaL
 })
 
@@ -116,7 +118,7 @@ function getPosition(): positionType {
     z-index: 1;
 }
 .drag-watched-inner-area {
-    background-color: rgba(58,58,255,0.5);
+    background-color: rgba(58, 58, 255, 0.5);
     position: absolute;
 }
 </style>

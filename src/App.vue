@@ -7,8 +7,8 @@
         checkOverlapArea="innerArea"
         innerAreaW="50%"
         innerAreaH="50%"
-        innerAreaT="10%"
-        innerAreaL="10%"
+        innerAreaT="center"
+        innerAreaL="center"
       >
         <div class="test2"></div>
       </jzVueDragWatched>
@@ -30,8 +30,8 @@
         class="tttttt"
         :draggableAreaW="'50%'"
         :draggableAreaH="'50%'"
-        :draggableAreaT="'20%'"
-        :draggableAreaL="'20%'"
+        :draggableAreaT="'center'"
+        :draggableAreaL="'center'"
         :checkOverlapArea="'draggableArea'"
       >
         <div class="test3"></div>
