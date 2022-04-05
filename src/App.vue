@@ -1,7 +1,15 @@
 <template>
   <div class="container">
     <jzVueDragLimitedAreaVue :dragLimitedRreaW="1000" :dragLimitedRreaH="600" ref="test">
-      <jzVueDragWatched ref="de1" :zIndex="2">
+      <jzVueDragWatched
+        ref="de1"
+        :zIndex="2"
+        checkOverlapArea="innerArea"
+        innerAreaW="50%"
+        innerAreaH="50%"
+        innerAreaT="10%"
+        innerAreaL="10%"
+      >
         <div class="test2"></div>
       </jzVueDragWatched>
       <jzVueDragWatched ref="de2" :zIndex="2" class="iiii">
