@@ -53,11 +53,12 @@ const de1 = ref()
 const de2 = ref()
 const watchComponents = [de1, de2]
 
-function dragging() {
-  // console.log(event)
+function dragging(event:any) {
+  alert("贴贴~\n"+event)
 }
-function dragstart() {
-  // console.log(event)
+function dragstart(event:any) {
+  alert("贴贴~\n"+event)
+  
 }
 </script>
 
