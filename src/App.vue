@@ -21,6 +21,7 @@
         class="lalalal"
         @dragging="dragging"
         @dragstart="dragstart"
+        @dragend="dragend"
       >
         <div class="test3"></div>
       </jzVueDragEl>
@@ -54,11 +55,17 @@ const de2 = ref()
 const watchComponents = [de1, de2]
 
 function dragging(event:any) {
-  console.log("贴贴~\n"+event)
+  // console.log("贴贴~\n"+event)
 }
 function dragstart(event:any) {
-  alert("贴贴~\n"+event)
+  // alert("贴贴~\n"+event)
   
+}
+function dragend(event:any) {
+  if( event.isOverlap==true){
+    alert("贴贴")
+  }
+
 }
 </script>
 
