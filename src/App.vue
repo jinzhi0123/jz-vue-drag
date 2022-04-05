@@ -38,6 +38,9 @@
       </jzVueDragEl>
     </jzVueDragLimitedAreaVue>
   </div>
+  <div>
+  <p>中心区域为判断区域</p>
+  </div>
 </template>
 
 <script setup lang="ts">
